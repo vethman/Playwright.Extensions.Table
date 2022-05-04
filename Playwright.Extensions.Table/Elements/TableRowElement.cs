@@ -35,7 +35,7 @@ namespace Playwright.Extensions.Table.Elements
         /// </summary>
         /// <param name="locatorHeaders">ILocator that represents all headers of a Table to create headersIndexer</param>
         /// <param name="locatorRow">ILocator that represents (single) row</param>
-        public TableRowElement(ILocator locatorHeaders, ILocator locatorRow) : this(new Dictionary<string, int>(), locatorRow, "td")
+        public TableRowElement(ILocator locatorHeaders, ILocator locatorRow) : this(new Dictionary<string, int>(), locatorRow, Constants.SELECTOR_CELL)
         {
             _locatorHeaders = locatorHeaders;
         }
