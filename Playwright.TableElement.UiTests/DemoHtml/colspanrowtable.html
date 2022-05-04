@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cell in header that spans two columns</h2>
+
+    <table style="width:50%">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>BetaBot</td>
+                <td>Robots</td>
+                <td>5000</td>
+            </tr>
+            <tr>
+                <td>BetaBand</td>
+                <td>Music</td>
+                <td>3000</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td colspan="2">8000</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
