@@ -20,22 +20,22 @@ namespace Playwright.Extensions.Table.UiTests
         private IBrowser _browser;
 
         [OneTimeSetUp]
-        public void OneTimeSetup()
+        public async Task OneTimeSetup()
         {
-            var playwright = Microsoft.Playwright.Playwright.CreateAsync().Result;
+            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-            _browser = playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            _browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
                 Headless = false
-            }).Result;
+            });
 
-            _page = _browser.NewPageAsync().Result;
+            _page = await _browser.NewPageAsync();
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
+        public async Task OneTimeTearDown()
         {
-            _browser.CloseAsync();
+            await _browser.CloseAsync();
         }
 
         [Test]
