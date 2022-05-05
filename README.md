@@ -2,8 +2,8 @@
 
 ## Playwright.Extensions.Table
 
-The `Table` package contains the elements you need to test HTML tables. By default, tables are not supported by Playwright. This package
-enables you to test the structure and contents of tables with just a few lines of code.
+The `Playwright.Extensions.Table` package contains the elements you need to test HTML tables. By default, tables are not supported by
+Playwright. This package enables you to test the structure and contents of tables with just a few lines of code.
 
 ### Example
 
@@ -34,7 +34,6 @@ public async Task SimpleTable_HeaderValues()
     tableHeaderValues.First().Should().BeEquivalentTo(expectedFirstHeader);
     tableRowElements[0].TableHeaderValues.First().Should().BeEquivalentTo(expectedFirstHeader);
 }
-
 ```
 
 ## About Playwright
