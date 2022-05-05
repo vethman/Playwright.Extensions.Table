@@ -24,6 +24,7 @@ namespace Playwright.Extensions.Table.UiTests.PageObjects
             var rowLocator = _page.Locator(Constants.SELECTOR_TABLEROWS);
             return new TableRowElement(headersLocator, rowLocator);
         }
+        
         public ITableRowElement SingleTableRowWithColumnSelector()
         {
             var headersLocator = _page.Locator(Constants.SELECTOR_TABLEHEADERS);
