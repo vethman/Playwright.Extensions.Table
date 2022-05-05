@@ -17,22 +17,26 @@ public async Task SimpleTable_HeaderValues()
     using var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
     await using var browser = await playwright.Chromium.LaunchAsync();
     var page = await browser.NewPageAsync();
-
+    await _page.GotoAsync("https://www.w3schools.com/html/html_tables.asp");
+    
     // Arrange (Locator setup)
-    var tableHeaders = page.Locator("//table/thead/tr/th");
-    var tableRows = page.Locator("//table/tbody/tr");
-    var tableElement = page.LocatorTableElement(tableHeaders, tableRows);
-
-    var expectedFirstHeader = "Specification";
-
+    //Selector for every cell containing headers inside first tablerow.
+    var tableHeaders = _page.Locator("table[id='customers'] > tbody > tr > th");
+    //Selector for all tablerows minus the first because that contains the headers.
+    var tableRows = _page.Locator("table[id='customers'] > tbody > tr ~ tr");
+    var tableElement = _page.LocatorTableElement(tableHeaders, tableRows);
+    
     // Act
-    await page.GotoAsync("https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table");
     var tableHeaderValues = await tableElement.GetTableHeaderValuesAsync();
     var tableRowElements = await tableElement.GetTableRowElementsAsync();
-
+    var tableRowIslandTrading = tableRowElements.Single(x => x.GetColumn("Company").TextContentAsync().Result == "Island Trading");
+    
     // Assert
+    var expectedFirstHeader = "Company";
+    
     tableHeaderValues.First().Should().BeEquivalentTo(expectedFirstHeader);
     tableRowElements[0].TableHeaderValues.First().Should().BeEquivalentTo(expectedFirstHeader);
+    (await tableRowIslandTrading.GetColumn("Country").TextContentAsync()).Should().Be("UK");
 }
 ```
 
