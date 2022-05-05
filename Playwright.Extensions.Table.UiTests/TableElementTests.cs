@@ -16,15 +16,16 @@ namespace Playwright.Extensions.Table.UiTests
 {
     public class TableElementTests
     {
+        private IPlaywright _playwright;
         private IPage _page;
         private IBrowser _browser;
 
         [OneTimeSetUp]
         public async Task OneTimeSetup()
         {
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
+            _playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-            _browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+            _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {
                 Headless = false
             });
@@ -36,6 +37,7 @@ namespace Playwright.Extensions.Table.UiTests
         public async Task OneTimeTearDown()
         {
             await _browser.CloseAsync();
+            _playwright.Dispose();
         }
 
         [Test]
