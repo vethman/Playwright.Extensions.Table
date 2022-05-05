@@ -16,7 +16,7 @@ namespace Playwright.Extensions.Table.UiTests.PageObjects
 
         public async Task<IEnumerable<ButtonTableRow>> ButtonTableRowsAsync()
         {
-            var tableElement = _page.LocatorTableElement(_page.Locator(Constants.SELECTOR_TABLEHEADER), _page.Locator(Constants.SELECTOR_TABLEROWS));
+            var tableElement = _page.LocatorTableElement(_page.Locator(Constants.SELECTOR_TABLEHEADERS), _page.Locator(Constants.SELECTOR_TABLEROWS));
             var tableRowElements = await tableElement.GetTableRowElementsAsync();
             return tableRowElements.Select(x => new ButtonTableRow(x));
         }
