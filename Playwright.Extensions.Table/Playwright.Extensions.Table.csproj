@@ -10,8 +10,8 @@
 		<PackageTags>Playwright, Table, tbody, thead, tr, td, html</PackageTags>
 		<RepositoryUrl>https://github.com/vethman/Playwright.TableElement</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Version>1.0.0</Version>
-		<PackageReleaseNotes>Initial version. Rewritten from the ground up to work with Playwright. Based on Selenium.TableElement.</PackageReleaseNotes>
+		<Version>1.0.1</Version>
+		<PackageReleaseNotes>Changed the namespaces to match Microsoft.Playwright.</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
