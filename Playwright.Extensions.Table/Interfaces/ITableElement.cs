@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Playwright.Extensions.Table.Interfaces
+namespace Microsoft.Playwright.Extensions.Table.Interfaces
 {
     /// <summary>
     /// Defines the interface through which the user can access table header values and table rows.

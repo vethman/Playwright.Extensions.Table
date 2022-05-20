@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Microsoft.Playwright.Extensions.Table.ExtensionMethods;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using Playwright.Extensions.Table.ExtensionMethods;
-
-namespace Playwright.Extensions.Table.UiTests.PageObjects
+namespace Microsoft.Playwright.Extensions.Table.UiTests.PageObjects
 {
     public class ButtonTable
     {

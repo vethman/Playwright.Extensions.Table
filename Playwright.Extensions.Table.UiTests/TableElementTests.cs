@@ -1,18 +1,14 @@
+using FluentAssertions;
+using Microsoft.Playwright.Extensions.Table.Elements;
+using Microsoft.Playwright.Extensions.Table.Interfaces;
+using Microsoft.Playwright.Extensions.Table.UiTests.PageObjects;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using FluentAssertions;
-using NUnit.Framework;
-
-using Playwright.Extensions.Table.Elements;
-using Playwright.Extensions.Table.UiTests.PageObjects;
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.UiTests
+namespace Microsoft.Playwright.Extensions.Table.UiTests
 {
     public class TableElementTests
     {
@@ -23,7 +19,7 @@ namespace Playwright.Extensions.Table.UiTests
         [OneTimeSetUp]
         public async Task OneTimeSetup()
         {
-            _playwright = await Microsoft.Playwright.Playwright.CreateAsync();
+            _playwright = await Playwright.CreateAsync();
 
             _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
             {

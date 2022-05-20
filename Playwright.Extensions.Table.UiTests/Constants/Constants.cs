@@ -1,4 +1,4 @@
-﻿namespace Playwright.Extensions.Table.UiTests
+﻿namespace Microsoft.Playwright.Extensions.Table.UiTests
 {
     public static class Constants
     {

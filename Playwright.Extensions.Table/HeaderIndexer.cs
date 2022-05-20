@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-namespace Playwright.Extensions.Table
+namespace Microsoft.Playwright.Extensions.Table
 {
     internal class HeaderIndexer
     {

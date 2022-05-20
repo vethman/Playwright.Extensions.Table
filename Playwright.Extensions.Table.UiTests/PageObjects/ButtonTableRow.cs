@@ -1,10 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.Playwright.Extensions.Table.Interfaces;
+using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.UiTests.PageObjects
+namespace Microsoft.Playwright.Extensions.Table.UiTests.PageObjects
 {
     public class ButtonTableRow
     {

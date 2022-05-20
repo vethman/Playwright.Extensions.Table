@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Microsoft.Playwright.Extensions.Table.Elements;
+using Microsoft.Playwright.Extensions.Table.ExtensionMethods;
+using Microsoft.Playwright.Extensions.Table.Interfaces;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using Playwright.Extensions.Table.Elements;
-using Playwright.Extensions.Table.ExtensionMethods;
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.UiTests.PageObjects
+namespace Microsoft.Playwright.Extensions.Table.UiTests.PageObjects
 {
     public class SimpleTable
     {

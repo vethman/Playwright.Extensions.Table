@@ -1,9 +1,7 @@
-﻿using Microsoft.Playwright;
+﻿using Microsoft.Playwright.Extensions.Table.Elements;
+using Microsoft.Playwright.Extensions.Table.Interfaces;
 
-using Playwright.Extensions.Table.Elements;
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.ExtensionMethods
+namespace Microsoft.Playwright.Extensions.Table.ExtensionMethods
 {
     /// <summary>
     /// Provides extension methods for convenience in using IPage.

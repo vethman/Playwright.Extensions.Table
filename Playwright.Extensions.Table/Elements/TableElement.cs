@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Playwright.Extensions.Table.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.Elements
+namespace Microsoft.Playwright.Extensions.Table.Elements
 {
     /// <summary>
     /// TableElement supports testing Html Tables with Playwright.

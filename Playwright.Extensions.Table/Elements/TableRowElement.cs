@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.Playwright.Extensions.Table.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Microsoft.Playwright;
-
-using Playwright.Extensions.Table.Interfaces;
-
-namespace Playwright.Extensions.Table.Elements
+namespace Microsoft.Playwright.Extensions.Table.Elements
 {
     /// <summary>
     /// TableRowElement supports testing Html TableRows with Playwright.

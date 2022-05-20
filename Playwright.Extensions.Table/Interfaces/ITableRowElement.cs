@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Playwright;
 
-namespace Playwright.Extensions.Table.Interfaces
+namespace Microsoft.Playwright.Extensions.Table.Interfaces
 {
     /// <summary>
     /// Defines the interface through which the user can access tablerow columns.

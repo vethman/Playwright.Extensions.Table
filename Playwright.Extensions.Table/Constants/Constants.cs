@@ -1,4 +1,4 @@
-﻿namespace Playwright.Extensions.Table
+﻿namespace Microsoft.Playwright.Extensions.Table
 {
     public static class Constants
     {
