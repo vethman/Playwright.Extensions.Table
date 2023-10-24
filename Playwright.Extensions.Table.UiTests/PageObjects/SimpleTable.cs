@@ -11,7 +11,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests.PageObjects
     {
         private readonly IPage _page;
 
-        public ITableElement ColspanTableElement => _page.LocatorTableElement(TableHeaders, TableRows);
+        public ITableElement TableElement => _page.LocatorTableElement(TableHeaders, TableRows);
         public ILocator TableHeaders => _page.Locator(Constants.SELECTOR_TABLEHEADERS);
         public ILocator TableRows => _page.Locator(Constants.SELECTOR_TABLEROWS);
 

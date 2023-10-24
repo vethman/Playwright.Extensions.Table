@@ -1,7 +1,10 @@
-﻿using Microsoft.Playwright.Extensions.Table.Interfaces;
+﻿using System;
+using Microsoft.Playwright.Extensions.Table.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Playwright.Extensions.Table.Elements
 {
@@ -71,6 +74,39 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
             }
 
             return tableRowElements.AsReadOnly();
+        }
+        
+        /// <summary>
+        /// Parse ITableRowElements into objects of chosen type, should not contain nested properties and only of type string
+        /// </summary>
+        /// <typeparam name="T">Generic type</typeparam>
+        /// <returns>IEnumerable<T></returns>
+        public async Task<IEnumerable<T>> ParseAsync<T>()
+        {
+            foreach (var propertyInfo in typeof(T).GetProperties())
+            {
+                if (propertyInfo.PropertyType != typeof(string))
+                {
+                    throw new NotSupportedException($"Property {propertyInfo.Name} of type {propertyInfo.PropertyType} not allowed, only string supported");
+                }
+            }
+            
+            var rows = await GetTableRowElementsAsync();
+
+            var items = new List<T>();
+
+            foreach (var row in rows)
+            {
+                var headers = row.TableHeaderValues;
+                var jsonProperties = await Task.WhenAll(headers
+                    .Select(async header => new JProperty(Regex.Replace(header, @"\s+", ""), await row.GetColumn(header).TextContentAsync())));
+                var jsonObject = new JObject(jsonProperties);
+                var item = jsonObject.ToObject<T>();
+
+                items.Add(item);
+            }
+
+            return items;
         }
     }
 }
