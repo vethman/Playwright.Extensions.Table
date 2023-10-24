@@ -20,7 +20,6 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
         private readonly ILocator _locatorHeaders;
         private readonly ILocator _locatorRows;
         private readonly string _cellSelector;
-        private readonly HeaderIndexer _headerIndexer;
 
         /// <summary>
         /// Creates TableElement that contains zero or multiple TableElementRows. Default columnselector "td"
@@ -42,7 +41,6 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
             _locatorHeaders = locatorHeaders;
             _locatorRows = locatorRows;
             _cellSelector = cellSelector;
-            _headerIndexer = new HeaderIndexer();
         }
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
         /// <returns>IEnumerable<string> representing all found headertexts.</returns>
         public async Task<IEnumerable<string>> GetTableHeaderValuesAsync()
         {
-            var headerIndexerDictionary = await _headerIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
+            var headerIndexerDictionary = await HeaderIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
             return headerIndexerDictionary.Select(x => x.Key);
         }
 
@@ -61,7 +59,7 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
         /// <returns></returns>
         public async Task<IReadOnlyList<ITableRowElement>> GetTableRowElementsAsync()
         {
-            var headerIndexer = await _headerIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
+            var headerIndexer = await HeaderIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
 
             var tableRowElements = new List<ITableRowElement>();
 

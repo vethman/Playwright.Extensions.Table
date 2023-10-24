@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Playwright.Extensions.Table
 {
-    internal class HeaderIndexer
+    internal static class HeaderIndexer
     {
-        public async Task<IDictionary<string, int>> HeadersIncludingColspanAndDuplicateAsync(ILocator locatorHeaders)
+        public static async Task<IDictionary<string, int>> HeadersIncludingColspanAndDuplicateAsync(ILocator locatorHeaders)
         {
             var headerNames = new List<string>();
             var count = await locatorHeaders.CountAsync();
