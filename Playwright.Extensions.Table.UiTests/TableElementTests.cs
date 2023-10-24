@@ -211,6 +211,20 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             actualSimpleTableTables.Should().BeEquivalentTo(expectedSimpleTableTables);
         }
+        
+        [Test]
+        public async Task SimpleTable_ParseAsync_PropertyNotStringButEnumerable_ShouldThrowException()
+        {
+            var simpleTable = new SimpleTable(_page);
+
+            await simpleTable.Open();
+
+            var tableElement = simpleTable.TableElement;
+
+            var act = () => tableElement.ParseAsync<InvalidPropertyTypeTable>();
+            await act.Should().ThrowAsync<NotSupportedException>()
+                .WithMessage($"Property {nameof(InvalidPropertyTypeTable.DateOfBirth)} of type {typeof(DateTime)} not allowed, only string supported");
+        }
 
         [Test]
         public async Task ColspanHeaderTable_HeaderValueClonedByColspan()
