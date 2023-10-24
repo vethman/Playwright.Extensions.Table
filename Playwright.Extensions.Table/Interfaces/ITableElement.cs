@@ -20,6 +20,11 @@ namespace Microsoft.Playwright.Extensions.Table.Interfaces
         /// <returns></returns>
         Task<IReadOnlyList<ITableRowElement>> GetTableRowElementsAsync();
 
+        /// <summary>
+        /// Parse ITableRowElements into objects of chosen type, should not contain nested properties and only of type string
+        /// </summary>
+        /// <typeparam name="T">Generic type</typeparam>
+        /// <returns>IEnumerable<T></returns>
         Task<IEnumerable<T>> ParseAsync<T>();
     }
 }
