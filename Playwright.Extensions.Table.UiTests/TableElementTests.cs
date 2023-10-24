@@ -7,14 +7,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Playwright.Extensions.Table.UiTests.TableObjects;
 
 namespace Microsoft.Playwright.Extensions.Table.UiTests
 {
     public class TableElementTests
     {
-        private IPlaywright _playwright;
-        private IPage _page;
-        private IBrowser _browser;
+        private IPlaywright _playwright = null!;
+        private IPage _page = null!;
+        private IBrowser _browser = null!;
 
         [OneTimeSetUp]
         public async Task OneTimeSetup()
@@ -45,7 +46,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             await simpleTable.Open();
 
-            var tableElement = simpleTable.ColspanTableElement;
+            var tableElement = simpleTable.TableElement;
             var tableHeaders = await tableElement.GetTableHeaderValuesAsync();
             var tableRowElements = await tableElement.GetTableRowElementsAsync();
 
@@ -60,7 +61,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             await simpleTable.Open();
 
-            var tableElement = simpleTable.ColspanTableElement;
+            var tableElement = simpleTable.TableElement;
             var tableRowElements = await tableElement.GetTableRowElementsAsync();
 
             Action act = () => tableRowElements.First().GetColumn("NotExistingHeaderError");
@@ -74,11 +75,11 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             await simpleTable.Open();
 
-            var tableElement = simpleTable.ColspanTableElement;
+            var tableElement = simpleTable.TableElement;
             var tableRowElements = await tableElement.GetTableRowElementsAsync();
-            var tableRowElement = tableRowElements.Single(x => x.GetColumn("First name").TextContentAsync().Result == "Beta");
+            var tableRowElement = tableRowElements.Single(x => x.GetColumn("First name").TextContentAsync().Result == "Logan");
 
-            (await tableRowElement.GetColumn("Last name").TextContentAsync()).Should().Be("Bit");
+            (await tableRowElement.GetColumn("Last name").TextContentAsync()).Should().Be("Deacon");
             (await tableRowElement.GetColumn("Date of birth").TextContentAsync()).Should().Be("01-10-2002");
         }
 
@@ -89,7 +90,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             await simpleTable.Open();
 
-            var tableElement = simpleTable.ColspanTableElement;
+            var tableElement = simpleTable.TableElement;
 
             (await tableElement.GetTableHeaderValuesAsync()).Should().HaveCount(3);
             (await tableElement.GetTableRowElementsAsync()).Should().HaveCount(2);
@@ -102,7 +103,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             await simpleTable.Open();
 
-            var tableElement = simpleTable.ColspanTableElement;
+            var tableElement = simpleTable.TableElement;
             var tableRowElements = (await tableElement.GetTableRowElementsAsync());
 
             tableElement.Should().BeAssignableTo<ITableElement>();
@@ -180,6 +181,36 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
             await act.Should().ThrowAsync<PlaywrightException>()
                 .WithMessage(Table.Constants.EXCEPTION_ROWLOCATOR_NO_RESULTS);
         }
+        
+        [Test]
+        public async Task SimpleTable_ParseAsync_ShouldParseToObject()
+        {
+            var simpleTable = new SimpleTable(_page);
+
+            await simpleTable.Open();
+
+            var tableElement = simpleTable.TableElement;
+
+            var expectedSimpleTableTables = new List<SimpleTableTable>
+            {
+                new()
+                {
+                    FirstName = "Ronald",
+                    LastName = "Veth",
+                    DateOfBirth = "22-12-1987"
+                },
+                new()
+                {
+                    FirstName = "Logan",
+                    LastName = "Deacon",
+                    DateOfBirth = "01-10-2002"
+                }
+            };
+            
+            var actualSimpleTableTables = await tableElement.ParseAsync<SimpleTableTable>();
+
+            actualSimpleTableTables.Should().BeEquivalentTo(expectedSimpleTableTables);
+        }
 
         [Test]
         public async Task ColspanHeaderTable_HeaderValueClonedByColspan()
@@ -205,7 +236,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
 
             var tableElement = colspanHeaderTable.ColspanHeaderTableElement;
             var tableRowElements = await tableElement.GetTableRowElementsAsync();
-            var tableRowElement = tableRowElements.Single(x => x.GetColumn("Name").TextContentAsync().Result == "BetaBit");
+            var tableRowElement = tableRowElements.Single(x => x.GetColumn("Name").TextContentAsync().Result == "LoganDeacon");
 
             (await tableRowElement.GetColumn("Color Combination_1").TextContentAsync()).Should().Be("White");
             (await tableRowElement.GetColumn("Color Combination_2").TextContentAsync()).Should().Be("Red");
@@ -236,7 +267,7 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
             var tableElement = colspanRowTable.ColspanRowTableElement;
             var tabelRowElements = await tableElement.GetTableRowElementsAsync();
 
-            var tableRowElementWithoutColspan = tabelRowElements.Single(x => x.GetColumn("Item").TextContentAsync().Result == "BetaBand");
+            var tableRowElementWithoutColspan = tabelRowElements.Single(x => x.GetColumn("Item").TextContentAsync().Result == "Deacon");
             (await tableRowElementWithoutColspan.GetColumn("Category").TextContentAsync()).Should().Be("Music");
             (await tableRowElementWithoutColspan.GetColumn("Price").TextContentAsync()).Should().Be("3000");
 
@@ -293,9 +324,9 @@ namespace Microsoft.Playwright.Extensions.Table.UiTests
             await divTable.Open();
 
             var tableRowElements = await divTable.DivTableElement.GetTableRowElementsAsync();
-            var tableRowElement = tableRowElements.Single(x => x.GetColumn("First name").TextContentAsync().Result == "Beta");
+            var tableRowElement = tableRowElements.Single(x => x.GetColumn("First name").TextContentAsync().Result == "Logan");
 
-            (await tableRowElement.GetColumn("Last name").TextContentAsync()).Should().Be("Bit");
+            (await tableRowElement.GetColumn("Last name").TextContentAsync()).Should().Be("Deacon");
             (await tableRowElement.GetColumn("Specialty").TextContentAsync()).Should().Be("Make special together");
         }
 
