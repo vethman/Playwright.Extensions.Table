@@ -10,8 +10,8 @@
 		<PackageTags>Playwright, Table, tbody, thead, tr, td, html</PackageTags>
 		<RepositoryUrl>https://github.com/vethman/Playwright.TableElement</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<Version>1.0.2</Version>
-		<PackageReleaseNotes>Added support to parse to object and package updates</PackageReleaseNotes>
+		<Version>1.0.4</Version>
+		<PackageReleaseNotes>HeaderIndexer static now</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

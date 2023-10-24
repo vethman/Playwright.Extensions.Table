@@ -1,8 +1,8 @@
-﻿using Microsoft.Playwright.Extensions.Table.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Playwright.Extensions.Table.Interfaces;
 
 namespace Microsoft.Playwright.Extensions.Table.Elements
 {
@@ -12,9 +12,8 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
     public class TableRowElement : ITableRowElement
     {
         private readonly string _cellSelector;
-        private readonly HeaderIndexer _headerIndexer;
         private readonly ILocator _locatorHeaders;
-        private IDictionary<string, int> _headerIndexerDictionary = new Dictionary<string, int>();
+        private IDictionary<string, int> _headerIndexerDictionary;
         private IReadOnlyList<IElementHandle> _columns = new List<IElementHandle>();
 
         /// <summary>
@@ -68,7 +67,6 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
             _headerIndexerDictionary = headerIndexer;
             WrappedLocator = locatorRow;
             _cellSelector = cellSelector;
-            _headerIndexer = new HeaderIndexer();
         }
 
 
@@ -126,7 +124,7 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
 
             if (!_headerIndexerDictionary.Any())
             {
-                _headerIndexerDictionary = await _headerIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
+                _headerIndexerDictionary = await HeaderIndexer.HeadersIncludingColspanAndDuplicateAsync(_locatorHeaders);
             }
         }
 
