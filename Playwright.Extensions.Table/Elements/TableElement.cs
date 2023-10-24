@@ -99,7 +99,7 @@ namespace Microsoft.Playwright.Extensions.Table.Elements
             {
                 var headers = row.TableHeaderValues;
                 var jsonProperties = await Task.WhenAll(headers
-                    .Select(async header => new JProperty(Regex.Replace(header, @"\s+", ""), await row.GetColumn(header).TextContentAsync())));
+                    .Select(async header => new JProperty(Regex.Replace(header, @"\s+", ""), (await row.GetColumn(header).TextContentAsync())?.Trim())));
                 var jsonObject = new JObject(jsonProperties);
                 var item = jsonObject.ToObject<T>();
 
